@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "data": {
+    "markdown": "",
+    "metadata": {
+      "statusCode": 403,
+      "error": "Blocked insecure target URL \"http://172.23.0.3:8000/\": resolves to a private/internal address"
+    }
+  }
+}

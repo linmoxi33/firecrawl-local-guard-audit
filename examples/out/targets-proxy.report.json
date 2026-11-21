@@ -1,0 +1,104 @@
+{
+  "findings": [
+    {
+      "id": "PROXY_BYPASS_RISK",
+      "line": 2,
+      "reason": "hostname is only checked by GuardedResolver, and a proxy variable is set; reqwest resolves the proxy instead of the target (see issue #5942)",
+      "rule": "DNS_RESOLVER_ONLY",
+      "severity": "error",
+      "url": "https://docs.firecrawl.dev/features/scrape"
+    },
+    {
+      "id": "REFUSED_STATIC",
+      "line": 4,
+      "reason": "10.0.0.5 is a private address; private targets are off",
+      "rule": "PRIVATE_ADDRESS",
+      "severity": "warning",
+      "url": "http://10.0.0.5/admin"
+    },
+    {
+      "id": "REFUSED_STATIC",
+      "line": 6,
+      "reason": "169.254.169.254 is a link-local or metadata address and is never reachable",
+      "rule": "ALWAYS_BLOCKED",
+      "severity": "warning",
+      "url": "http://169.254.169.254/latest/meta-data/"
+    },
+    {
+      "id": "PROXY_BYPASS_RISK",
+      "line": 8,
+      "reason": "hostname is only checked by GuardedResolver, and a proxy variable is set; reqwest resolves the proxy instead of the target (see issue #5942)",
+      "rule": "DNS_RESOLVER_ONLY",
+      "severity": "error",
+      "url": "https://internal-gateway.example.com/health"
+    },
+    {
+      "id": "REFUSED_STATIC",
+      "line": 10,
+      "reason": "'printer.local' is a local hostname; private targets are off",
+      "rule": "LOCAL_HOSTNAME",
+      "severity": "warning",
+      "url": "http://printer.local/status"
+    }
+  ],
+  "mode": "targets",
+  "policy": "public-only",
+  "proxy_vars": [
+    "HTTPS_PROXY"
+  ],
+  "records": [
+    {
+      "dns_gate_only": true,
+      "host": "docs.firecrawl.dev",
+      "line": 2,
+      "proxy_bypass_risk": true,
+      "reason": "URL layer passes; refusal depends on DNS answers at connect time",
+      "rule": "DNS_RESOLVER_ONLY",
+      "url": "https://docs.firecrawl.dev/features/scrape",
+      "verdict": "ok"
+    },
+    {
+      "dns_gate_only": false,
+      "host": "10.0.0.5",
+      "line": 4,
+      "reason": "10.0.0.5 is a private address; private targets are off",
+      "rule": "PRIVATE_ADDRESS",
+      "url": "http://10.0.0.5/admin",
+      "verdict": "blocked"
+    },
+    {
+      "dns_gate_only": false,
+      "host": "169.254.169.254",
+      "line": 6,
+      "reason": "169.254.169.254 is a link-local or metadata address and is never reachable",
+      "rule": "ALWAYS_BLOCKED",
+      "url": "http://169.254.169.254/latest/meta-data/",
+      "verdict": "blocked"
+    },
+    {
+      "dns_gate_only": true,
+      "host": "internal-gateway.example.com",
+      "line": 8,
+      "proxy_bypass_risk": true,
+      "reason": "URL layer passes; refusal depends on DNS answers at connect time",
+      "rule": "DNS_RESOLVER_ONLY",
+      "url": "https://internal-gateway.example.com/health",
+      "verdict": "ok"
+    },
+    {
+      "dns_gate_only": false,
+      "host": "printer.local",
+      "line": 10,
+      "reason": "'printer.local' is a local hostname; private targets are off",
+      "rule": "LOCAL_HOSTNAME",
+      "url": "http://printer.local/status",
+      "verdict": "blocked"
+    }
+  ],
+  "summary": {
+    "blocked": 3,
+    "dns_gate_only": 2,
+    "proxy_bypass_risk": 2,
+    "targets": 5
+  }
+}

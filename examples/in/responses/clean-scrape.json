@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "data": {
+    "markdown": "# Firecrawl\n\nScrape, crawl and map the web.",
+    "metadata": {"statusCode": 200, "sourceURL": "https://docs.firecrawl.dev/"}
+  }
+}

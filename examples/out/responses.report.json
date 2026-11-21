@@ -1,0 +1,50 @@
+{
+  "findings": [
+    {
+      "file": "examples/in/responses/correct-refusal.json",
+      "id": "REFUSAL_REPORTED",
+      "index": 0,
+      "reason": "refusal surfaced as a failed scrape",
+      "severity": "info"
+    },
+    {
+      "file": "examples/in/responses/misreported-refusal.json",
+      "id": "MISREPORTED_REFUSAL",
+      "index": 0,
+      "reason": "refusal returned as a successful scrape (success:true, metadata.statusCode:403); clients that trust success see an empty success",
+      "severity": "error"
+    }
+  ],
+  "mode": "responses",
+  "records": [
+    {
+      "error": "",
+      "file": "examples/in/responses/clean-scrape.json",
+      "has_content": true,
+      "index": 0,
+      "status_code": 200,
+      "success": true
+    },
+    {
+      "error": "InsecureConnectionError: http://10.0.0.5/ is a private address; private targets are off",
+      "file": "examples/in/responses/correct-refusal.json",
+      "has_content": false,
+      "index": 0,
+      "status_code": null,
+      "success": false
+    },
+    {
+      "error": "Blocked insecure target URL \"http://172.23.0.3:8000/\": resolves to a private/internal address",
+      "file": "examples/in/responses/misreported-refusal.json",
+      "has_content": false,
+      "index": 0,
+      "status_code": 403,
+      "success": true
+    }
+  ],
+  "summary": {
+    "misreported_refusals": 1,
+    "responses": 3,
+    "success_without_content": 0
+  }
+}

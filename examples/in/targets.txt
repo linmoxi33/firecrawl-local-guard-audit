@@ -1,0 +1,10 @@
+# A public docs page: passes the URL layer, refused only if DNS lies.
+https://docs.firecrawl.dev/features/scrape
+# An RFC1918 IP literal: refused before any network activity.
+http://10.0.0.5/admin
+# A cloud metadata endpoint: refused in every mode.
+http://169.254.169.254/latest/meta-data/
+# A hostname the operator controls that resolves to an intranet address.
+https://internal-gateway.example.com/health
+# A static local name: refused by the URL layer itself.
+http://printer.local/status
